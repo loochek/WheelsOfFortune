@@ -30,8 +30,6 @@ void GameClient::Run(std::string server_addr, int port)
 
 bool GameClient::UserInteract(ServerMessage &response, ClientMessage &request)
 {
-    bool game_finished = false;
-
     switch (response.status)
     {
     case RESP_START:
@@ -48,13 +46,11 @@ bool GameClient::UserInteract(ServerMessage &response, ClientMessage &request)
 
     case RESP_VICTORY:
         std::cout << "You win! :)" << std::endl;
-        game_finished = true;
-        break;
+        return true;
 
     case RESP_DEFEAT:
         std::cout << "No social credit left. Game over :(" << std::endl;
-        game_finished = true;
-        break;
+        return true;
     }
 
     std::cout << "Word: " << response.player_word << std::endl;
@@ -63,5 +59,5 @@ bool GameClient::UserInteract(ServerMessage &response, ClientMessage &request)
     std::cout << "Enter letter: ";
     std::cin >> request.letter;
 
-    return game_finished;
+    return false;
 }

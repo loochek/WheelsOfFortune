@@ -48,6 +48,10 @@ void GameServer::ClientHandler(Socket socket)
             // Make step in the game logic
             game_finished = state.Step(request, response);
         }
+
+        // Send server final response
+        size_t bytes_written = socket.Write(static_cast<void*>(&response), sizeof(ServerMessage));
+        assert(bytes_written == sizeof(ServerMessage));
     }
     catch (const std::exception &e)
     {
