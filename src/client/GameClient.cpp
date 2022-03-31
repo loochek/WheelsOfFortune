@@ -54,7 +54,7 @@ bool GameClient::UserInteract(ServerMessage &response, ClientMessage &request)
     }
 
     std::cout << "Word: " << response.player_word << std::endl;
-    std::cout << response.lives_left << " social credit left" << std::endl;
+    std::cout << int(response.lives_left) << " social credit left" << std::endl;
 
     std::cout << "Enter letter: ";
     std::cin >> request.letter;
